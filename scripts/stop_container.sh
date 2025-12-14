@@ -1,7 +1,11 @@
 #!/bin/bash
 
 set -e
-docker stop $(docker ps -q)
 
+RUNNING_CONTAINERS=$(docker ps -q)
+
+if [ -n "$RUNNING_CONTAINERS" ]; then
+  docker stop $RUNNING_CONTAINERS
+fi
 
 echo "Hi -----"
