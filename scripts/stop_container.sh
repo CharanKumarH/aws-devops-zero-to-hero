@@ -1,7 +1,11 @@
 #!/bin/bash
+
 set -e
 
-# Stop the running container (if any)
-latest_container_id =`docker ps | awk -F " " '{print $1}'`
-docker rm -f latest_container_id
-echo "Hi"
+LATEST_CONTAINER_ID=$(docker ps -q | head -n 1)
+
+if [ -n "$LATEST_CONTAINER_ID" ]; then
+  docker rm -f "$LATEST_CONTAINER_ID"
+fi
+
+echo "Hi -----"
